@@ -9,7 +9,7 @@ struct Interval {
     int weight;
 };
 
-
+// finds the rightmost compatible interval with the interval at current index
 int latestNonOverlapping(const vector<Interval>& intervals, int index) {
     int low = 0, high = index - 1;
     while (low <= high) {
@@ -47,7 +47,7 @@ int maxWeightIntervalScheduling(vector<Interval>& intervals) {
             includeWeight += dp[latest];
         }
 
-        // Exclude the current interval (take the previous result)
+        // Choose whether or not to pick the curren interval
         dp[i] = max(dp[i - 1], includeWeight);
     }
 
