@@ -9,7 +9,7 @@ struct Interval {
     int weight;
 };
 
-// finds the rightmost compatible interval with the interval at current index
+// finds the rightmost compatible interval
 int latestNonOverlapping(const vector<Interval>& intervals, int index) {
     int low = 0, high = index - 1;
     while (low <= high) {
