@@ -40,7 +40,7 @@ int maxWeightIntervalScheduling(vector<Interval>& intervals) {
     dp[0] = intervals[0].weight;
 
     for (int i = 1; i < n; ++i) {
-        // Include the current interval
+        
         int includeWeight = intervals[i].weight;
         int latest = latestNonOverlapping(intervals, i);
         if (latest != -1) {
@@ -55,7 +55,7 @@ int maxWeightIntervalScheduling(vector<Interval>& intervals) {
 }
 
 int main() {
-    // Example input: start, end, and weight for each interval
+    // start, end, weight
     vector<Interval> intervals = {
         {1, 3, 5},
         {2, 5, 6},
