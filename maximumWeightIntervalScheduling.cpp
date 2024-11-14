@@ -9,8 +9,8 @@ struct Interval {
     int weight;
 };
 
-// finds the rightmost compatible interval
-int latestNonOverlapping(const vector<Interval>& intervals, int index) {
+// finds the rightmost compatible interval with the interval at current index
+int rightmostCompatible(const vector<Interval>& intervals, int index) {
     int low = 0, high = index - 1;
     while (low <= high) {
         int mid = low + (high - low) / 2;
@@ -28,21 +28,23 @@ int latestNonOverlapping(const vector<Interval>& intervals, int index) {
 }
 
 
-int maxWeightIntervalScheduling(vector<Interval>& intervals) {
+int opt(vector<Interval>& intervals) {
     int n = intervals.size();
+
     // Sort intervals by end time
     sort(intervals.begin(), intervals.end(), [](const Interval& a, const Interval& b) {
         return a.end < b.end;
     });
 
-    // DP array to store the maximum weight at each interval
+    // DP array stores the optimum for each interval
     vector<int> dp(n);
+    
     dp[0] = intervals[0].weight;
 
     for (int i = 1; i < n; ++i) {
         
         int includeWeight = intervals[i].weight;
-        int latest = latestNonOverlapping(intervals, i);
+        int latest = rightmostCompatible(intervals, i);
         if (latest != -1) {
             includeWeight += dp[latest];
         }
@@ -65,7 +67,7 @@ int main() {
         {7, 9, 2}
     };
 
-    int maxWeight = maxWeightIntervalScheduling(intervals);
+    int maxWeight = opt(intervals);
     cout << "Maximum Weight of Non-Overlapping Intervals: " << maxWeight << endl;
 
     return 0;
